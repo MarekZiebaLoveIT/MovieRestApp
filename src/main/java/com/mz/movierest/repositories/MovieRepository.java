@@ -15,7 +15,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
             m.title like %:title% or
             m.director like %:director% or 
             (:c is null or m.category = :c) or
-            (:yf is null or m.year >= :yearFrom) or 
+            (:yf is null or m.year >= :yearFrom) and 
             (:yt is null or m.year <= :yearTo)
             """)
 

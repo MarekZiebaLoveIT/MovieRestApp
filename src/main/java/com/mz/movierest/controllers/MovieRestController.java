@@ -12,11 +12,12 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("api/movies")
 public class MovieRestController {
 
     private final MovieService service;
 
-    @GetMapping("rest/movies")
+    @GetMapping()
     public List<Movie> getMovies(@RequestParam(required = false, name = "t") String title,
                                  @RequestParam(required = false, name = "d") String director,
                                  @RequestParam(required = false, name = "yf") Integer yearFrom,
@@ -26,7 +27,7 @@ public class MovieRestController {
     }
 
 
-    @GetMapping("rest/movies/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
         var optionalMovie = service.findMovie(id);
         if (optionalMovie.isPresent()) {
@@ -37,19 +38,19 @@ public class MovieRestController {
     }
 
 
-    @PostMapping("rest/movies")
+    @PostMapping()
     public ResponseEntity<Movie> addMovie(@RequestBody @Valid Movie movie) {
         return ResponseEntity.ok(service.addMovie(movie));
     }
 
 
-    @PutMapping("rest/movies/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Movie> editMovie(@PathVariable Long id, @RequestBody @Valid Movie movie) {
         return ResponseEntity.ok(service.updateMovie(id, movie));
     }
 
 
-    @DeleteMapping("rest/movies/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeMovie(@PathVariable Long id) {
         var optionalMovie = service.findMovie(id);
         if (optionalMovie.isPresent()) {

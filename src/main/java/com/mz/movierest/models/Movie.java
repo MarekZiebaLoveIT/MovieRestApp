@@ -42,8 +42,6 @@ public class Movie {
     private MovieCategory category;
 
     @NotBlank(message = "Url for pics is required")
-    @Size(min = 5, max = 200, message = "Url requires 5-200 symbols")
-    @Column(length = 200)
     private String picUrl;
 
 }
