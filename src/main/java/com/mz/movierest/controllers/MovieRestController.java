@@ -4,6 +4,7 @@ import com.mz.movierest.models.Movie;
 import com.mz.movierest.models.MovieCategory;
 import com.mz.movierest.services.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +19,9 @@ public class MovieRestController {
     private final MovieService service;
 
     @GetMapping()
-    public List<Movie> getMovies(@RequestParam(required = false, name = "t") String title,
-                                 @RequestParam(required = false, name = "d") String director,
-                                 @RequestParam(required = false, name = "yf") Integer yearFrom,
-                                 @RequestParam(required = false, name = "yt") Integer yearTo,
-                                 @RequestParam(required = false, name = "c") MovieCategory category) {
-        return service.getMoviesByParams(title, director, yearFrom, yearTo, category);
+    public List<Movie> search(@RequestBody String request) {
+        return service.findMovieBySpecification();
+        // TODO: 2022-08-20  
     }
 
 
